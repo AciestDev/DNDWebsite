@@ -8,10 +8,8 @@
 		<version>4.1.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>demo</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name/>
+	<groupId>com.dndwebsite</groupId>
+	<artifactId>BackendProject2</artifactId>
 	<description/>
 	<url/>
 	<licenses>
