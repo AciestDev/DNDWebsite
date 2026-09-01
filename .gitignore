@@ -1,0 +1,19 @@
+# Compiled Maven output & target directories
+/target/
+*.class
+
+# IntelliJ IDEA workspace files
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Operating System temporary files
+.DS_Store
+Thumbs.db
+
+# Docker / Database persistent data volumes (do NOT commit database data)
+/postgres_data/
+/mysql_data/
+*.db
+*.sqlite

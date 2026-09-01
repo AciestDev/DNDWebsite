@@ -1,0 +1,267 @@
+/*
+    style for clickable items
+*/
+.card-clickable {
+    display: grid;
+    width: 11.1875rem;
+    height: 5.75rem;
+    border: 1px solid;
+    border-radius: var(--border-radius-1x);
+    padding: var(--spacing-3x);
+    cursor: pointer;
+    outline: 0;
+
+    &[disabled] {
+        pointer-events: none;
+        background-color: unset;
+        cursor: not-allowed;
+        color: var(--color-text-soft-50);
+    }
+
+    &:not(.selected):focus-visible {
+        outline: 3px solid;
+    }
+
+    &.selected {
+        cursor: unset;
+        pointer-events: none;
+        border-color: var(--color-primary);
+        color: var(--color-primary);
+    }
+}
+
+.card-clickable-surface {
+    color: var(--color-text-strong);
+    background-color: var(--bg-surface);
+    border-color: var(--bg-surface-border);
+
+    &:not(.selected):hover,
+    &:not(.selected):focus-visible {
+        background-color: var(--bg-surface-hover);
+        border-color: var(--bg-surface-border-hover);
+        outline-color: var(--color-text-soft-50);
+    }
+
+    &:not(.selected):active {
+        background-color: var(--bg-surface-active);
+        border-color: var(--bg-surface-border-hover);
+    }
+
+    &[disabled] {
+        background-color: var(--bg-surface);
+        border-color: var(--bg-surface-border);
+    }
+}
+
+.card-clickable-item {
+    background-color: var(--bg-item);
+    border-color: var(--bg-item-border);
+
+    &:not(.selected):hover,
+    &:not(.selected):focus-visible {
+        background-color: var(--bg-item-hover);
+        border-color: var(--bg-item-border-hover);
+        outline-color: var(--color-text-soft-50);
+    }
+
+    &:not(.selected):active {
+        background-color: var(--bg-surface-active);
+        border-color: var(--bg-item-border-hover);
+    }
+
+    &[disabled] {
+        background-color: unset;
+        border-color: var(--bg-item-border);
+    }
+}
+
+/*
+    Styles for card-shaped event elements
+*/
+.event-card-container {
+    display: grid;
+    grid-template-rows: 180px minmax(110px, 1fr) min-content;
+    grid-template-columns: minmax(300px, 1fr);
+
+    /* min-width to fit smallest mobile size */
+    color: var(--color-primary-text);
+    background-color: var(--bg-surface);
+    border-radius: var(--border-radius-1x);
+    border: 1px solid var(--bg-item-border);
+    box-sizing: border-box;
+    text-decoration: none;
+    position: relative;
+}
+
+.event-card-status-tag {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: hsl(0deg 0% 0% / 70%);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.event-card-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-top-left-radius: var(--border-radius-1x);
+    border-top-right-radius: var(--border-radius-1x);
+}
+
+.event-card-main-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2x);
+    padding: var(--spacing-3x);
+}
+
+.event-card-title {
+    white-space: nowrap;
+    overflow: clip;
+    text-overflow: ellipsis;
+    margin: 0 0 var(--spacing-1x);
+    color: var(--color-text-strong);
+    font-family: var(--font-sans-serif);
+    font-size: 16px;
+}
+
+.event-card-subtitle {
+    white-space: nowrap;
+    overflow: clip;
+    text-overflow: ellipsis;
+    margin: 0;
+    color: var(--color-primary);
+    font-size: var(--text-body-small);
+    font-weight: normal;
+}
+
+.event-card-description {
+    overflow: clip;
+    font-size: var(--text-body-small);
+    height: 40px;
+    margin: 0;
+}
+
+.event-card-footer {
+    padding: var(--spacing-3x);
+    border-top: 1px solid var(--bg-item-border);
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--spacing-3x);
+}
+
+.event-card-footer-gamemaster {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--spacing-1x);
+    overflow: hidden;
+
+    p {
+        font-size: 12px;
+        margin: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+.event-card-footer-tagicons {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+    gap: var(--spacing-1x);
+}
+
+.event-card-tagicon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+}
+
+.event-card-tagicon-container:hover {
+    color: var(--color-text-strong);
+}
+
+/*
+    Styles for bar-shaped event elements, primarily on the admin page,
+    can extend to also cover styles for profile event bars (e.g. inside expandable interest list)
+*/
+.event-bar-container {
+    color: var(--color-primary-text);
+    border: solid;
+    background-color: var(--bg-surface);
+    border-radius: var(--border-radius-2x);
+    border-color: var(--bg-item-border);
+    border-width: 1px;
+    display: block;
+    text-decoration: none;
+    width: 100%;
+    min-height: 65px;
+    padding: var(--spacing-3x) var(--spacing-4x);
+    box-sizing: border-box;
+    transition: border-color 120ms ease-in-out;
+}
+
+.event-bar-container:hover {
+    border-color: var(--color-primary);
+}
+
+.event-bar-title {
+    white-space: nowrap;
+    overflow: clip;
+    text-overflow: ellipsis;
+    margin: 0 0 var(--spacing-1x);
+    color: var(--color-primary-text);
+    font-size: var(--text-body);
+    font-family: var(--font-sans-serif);
+    font-weight: 600;
+}
+
+.event-bar-subtitle {
+    white-space: nowrap;
+    overflow: clip;
+    text-overflow: ellipsis;
+    margin: 0;
+    color: var(--color-primary);
+    font-size: var(--text-body-small);
+    font-weight: 400;
+}
+
+/*
+    Similar to the above element, this card shows a single event.
+    It is used on the user's profile to show their submitted events and their interests.
+    NB: This element is meant to be clickable.
+ */
+.profile-event-bar {
+    display: grid;
+    grid-template-columns: auto max-content;
+    gap: var(--spacing-8x);
+    align-items: center;
+    color: var(--color-primary-text);
+    min-height: 50px;
+    box-sizing: border-box;
+    text-decoration: none;
+    padding: var(--spacing-3x) var(--spacing-4x);
+    border-radius: var(--border-radius-1x);
+    border: 1px solid var(--bg-item-border);
+    cursor: pointer;
+    font-size: var(--text-body-small);
+
+    .profile-event-bar-title {
+        font-weight: normal;
+        font-size: var(--text-body-small);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+.profile-event-bar:hover {
+    filter: brightness(110%);
+}

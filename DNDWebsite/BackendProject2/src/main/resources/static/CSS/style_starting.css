@@ -1,0 +1,45 @@
+main {
+    display: grid;
+    place-items: center;
+    min-height: 100dvh;
+    .login-container {
+        display: grid;
+        max-width: var(--mobile-min-width);
+        border: var(--border-size-1x) solid var(--color-primary);
+        border-radius: var(--border-radius-2x);
+        padding: var(--spacing-4x);
+        gap: var(--spacing-4x);
+        justify-items: center;
+        .intro {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-4x);
+            width: 100%;
+            overflow-wrap: break-word;
+            h1 {
+            text-align: center;
+            }
+            p {
+                font-size: var(--text-heading-4);
+                color: var(--color-text-soft-50);
+            }
+        }
+        .login-container-small {
+            display: grid;
+            gap: var(--spacing-4x);
+            .user-pass {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+    }
+
+    @container main (width > 600px) {
+        .login-container {
+            max-width: var(--mobile-max-width);
+            .intro {
+                max-width: var(--mobile-max-width - 15%);
+            }
+        }
+    }
+}

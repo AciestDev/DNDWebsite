@@ -1,0 +1,63 @@
+main {
+    display: grid;
+    background-image: url("../Images/front-page.jpg");
+    min-height: 100dvh;
+    background-size: cover;       /* Scales image to completely fill container */
+    background-repeat: no-repeat; /* Prevents tiling */
+    background-position: center;  /* Centers image horizontally and vertically */
+    place-items: center;
+
+    nav {
+        position: fixed;
+        align-self: baseline;
+        justify-self: baseline;
+    }
+
+    .main-page-login {
+        display: grid;
+        max-width: var(--mobile-min-width);
+        border: var(--border-size-1x) solid var(--color-primary);
+        border-radius: var(--border-radius-2x);
+        padding: var(--spacing-4x);
+        gap: var(--spacing-4x);
+        justify-items: center;
+        background-color: var(--bg-base);
+
+        h2 {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-4x);
+            width: 100%;
+            overflow-wrap: break-word;
+            h1 {
+            text-align: center;
+            }
+            p {
+                font-size: var(--text-heading-4);
+                color: var(--color-text-soft-50);
+            }
+        }
+        .main-page-login-small {
+            display: grid;
+            gap: var(--spacing-4x);
+            .user-pass {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+        a {
+            font-size: var(--text-heading-4);
+            color: var(--color-text-soft-50);
+            cursor: pointer;
+        }
+    }
+
+    @container main (width > 600px) {
+        .main-page-login {
+            left: var(--spacing-10x);
+            .main-page-login-small {
+                max-width: var(--mobile-max-width - 15%);
+            }
+        }
+    }
+}
