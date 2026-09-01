@@ -7,7 +7,7 @@
     <link rel="icon" type="image/x-icon" href="../Images/tab-icon.png">
     <link rel="stylesheet" href="../CSS/style.css">
     <link rel="stylesheet" href="../CSS/index.css">
-    <script src="../JavaScript/index.js"></script>
+    <script src="../JavaScript/index.js" defer></script>
 </head>
 <body>
     <main>
@@ -22,15 +22,16 @@
                 <div class="user-pass">
                     <label for="username">Username:</label>
                     <input type="text" id="username" 
-                    name="username" placeholder="Enter username">
+                    name="username" placeholder="Enter username" required>
                 </div>
                 <div class="user-pass">
                     <label for="password">Password:</label>
-                    <input type="text" id="password" 
-                    name="password" placeholder="Enter password">
+                    <input type="password" id="password"
+                    name="password" placeholder="Enter password" required>
                 </div>
-                <button id="signUp">Sign up!</button>
+                <button id="login-button" type="submit">Sign up!</button>
             </form>
+            <div id="responseMessage"></div>
             <a id="switch-login">already have an account?</a>
         </div>
     </main>

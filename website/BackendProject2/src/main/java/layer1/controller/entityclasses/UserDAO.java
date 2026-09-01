@@ -1,32 +1,39 @@
 package layer1.controller.entityclasses;
 
 import jakarta.persistence.*;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class UserDAO {
 
-    private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("backendProject2");
+
+    @PersistenceContext
+    private EntityManager em;
 
     public User findByUsername(String username) {
-
-        try (EntityManager em = emf.createEntityManager()) {
-            return em.find(User.class, username);
+        try {
+            return em.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class)
+                    .setParameter("username", username).getSingleResult();
+        } catch (Exception e) {
+            throw e;
         }
     }
 
     public List<User> findUsersByUsername(String username) {
 
-        try (EntityManager em = emf.createEntityManager()) {
+        try {
             return em.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class)
                     .setParameter("username", username)
                     .getResultList();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
     public void save(User user) {
 
-        EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
         try {
@@ -38,15 +45,12 @@ public class UserDAO {
                 tx.rollback();
             }
             throw e;
-        } finally {
-            em.close();
         }
     }
 
     public void save(String username, String password) {
 
         User user = new User(username, password);
-        EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
         try {
@@ -58,8 +62,6 @@ public class UserDAO {
                 tx.rollback();
             }
             throw e;
-        } finally {
-            em.close();
         }
     }
 }
