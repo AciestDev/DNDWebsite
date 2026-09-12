@@ -1,8 +1,9 @@
-package layer1.controller.entityclasses;
+package com.example.dnd.auth;
+
 
 import jakarta.persistence.*;
 import org.springframework.stereotype.Repository;
-
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
@@ -12,10 +13,14 @@ public class UserDAO {
     @PersistenceContext
     private EntityManager em;
 
-    public User findByUsername(String username) {
+    public User findSingleUserByUsername(String username) {
         try {
             return em.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class)
-                    .setParameter("username", username).getSingleResult();
+                    .setParameter("username", username)
+                    .getResultList()
+                    .stream()
+                    .findFirst()
+                    .orElse(null);
         } catch (Exception e) {
             throw e;
         }
@@ -32,36 +37,14 @@ public class UserDAO {
         }
     }
 
+    @Transactional
     public void save(User user) {
-
-        EntityTransaction tx = em.getTransaction();
-
-        try {
-            tx.begin();
-            em.persist(user);
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            if (tx.isActive()) {
-                tx.rollback();
-            }
-            throw e;
-        }
+        em.persist(user);
     }
 
+    @Transactional
     public void save(String username, String password) {
-
         User user = new User(username, password);
-        EntityTransaction tx = em.getTransaction();
-
-        try {
-            tx.begin();
-            em.persist(user);
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            if (tx.isActive()) {
-                tx.rollback();
-            }
-            throw e;
-        }
+        em.persist(user);
     }
 }

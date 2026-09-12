@@ -1,80 +1,56 @@
-let switcher = document.getElementById("switch-login").value;
-let loginButton = document.getElementById("login-button").value;
+const formHeader = document.querySelector(".main-page-login h2");
+const submitButton = document.getElementById("login-button");
+const switchLink = document.getElementById("switch-login");
+const loginForm = document.getElementById("login-form");
+const responseMessage = document.getElementById("responseMessage");
 
-function switchFunction() {
+let isRegisterMode = true;
 
-    if (switcher === "already have an account? Login") {
-        currLoginButton = currLoginButton.nodeValue("login");
-        currSwitch = currLoginButton.nodeValue("need an account? Register");
+switchLink.addEventListener("click", () => {
+    isRegisterMode = !isRegisterMode;
+
+    if (isRegisterMode) {
+        formHeader.textContent = "Create your account here!";
+        submitButton.textContent = "Sign up!";
+        switchLink.textContent = "already have an account? Login";
     } else {
-        currLoginButton = currLoginButton.nodeValue("login");
-        currSwitch = currLoginButton.nodeValue("already have an account? Login");
+        formHeader.textContent = "Welcome back! Login below.";
+        submitButton.textContent = "Login";
+        switchLink.textContent = "need an account? Register";
     }
-
-}
-
-switcher.addEventListener("click", switchFunction);
+});
 
 
 
 
-document.getElementById("login-form").addEventListener("submit", async function(event) {
+loginForm.addEventListener("submit", async function(event) {
     event.preventDefault();
 
-    const usernameInput = document.getElementById("username").value;
-    const passwordInput = document.getElementById("password").value;
-    const messageDiv = document.getElementById("responseMessage");
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
 
-    const formData = new URLSearchParms();
-    formData.append("username", usernameInput.value);
-    formData.append("password", passwordInput.value);
-
-    if (switcher === "need an account? Register") {
-        try {
-            const response = await fetch("/api/login", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
-                },
-                body: formData
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                messageDiv.style.color = "green";
-                messageDiv.textContent = data.message;
-            } else {
-                messageDiv.style.color = "red";
-                messageDiv.textContent = data.message;
-            }
-        } catch (error) {
-            messageDiv.style.color = "red";
-            messageDiv.textContent = "Could not connect to the server.";
-        }
-    } else {
-        try {
-            const response = await fetch("/api/register", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
-                },
-                body: formData
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                messageDiv.style.color = "green";
-                messageDiv.textContent = data.message;
-            } else {
-                messageDiv.style.color = "red";
-                messageDiv.textContent = data.message;
-            }
-        } catch (error) {
-            messageDiv.style.color = "red";
-            messageDiv.textContent = "Could not connect to the server.";
-        }
+    const jsonObject = {
+        username: username,
+        password: password,
     }
 
+    const endpoint = isRegisterMode ? "/api/register" : "/api/login";
+
+    try {
+        const response = await fetch(endpoint, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(jsonObject)
+        });
+
+        const data = await response.json();
+        responseMessage.textContent = data.message;
+        responseMessage.style.color = response.ok ? "green" : "red";
+
+    } catch (error) {
+        responseMessage.style.color = "red";
+        responseMessage.textContent = "Could not connect to the server.";
+    }
 });

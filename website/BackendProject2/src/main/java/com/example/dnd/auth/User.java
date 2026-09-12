@@ -1,4 +1,4 @@
-package layer1.controller.entityclasses;
+package com.example.dnd.auth;
 
 
 import jakarta.persistence.*;
