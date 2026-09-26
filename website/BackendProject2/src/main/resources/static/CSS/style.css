@@ -52,9 +52,12 @@ main {
                 }
             }
         }
+        #dashboard {
+            display: grid;
+        }
     }
 
     @container main (width > 600px) {
-            
+
     }
 }
