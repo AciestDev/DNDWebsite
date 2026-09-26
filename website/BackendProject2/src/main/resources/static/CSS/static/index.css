@@ -1,12 +1,13 @@
 :root {
-    --color-text-strong: rgb(241, 243, 249);
-    --color-text-soft: rgb(204, 209, 233);
+    --color-text-strong: #f1f3f9;
+    --color-text-soft: #ccd1e9;
     --color-text-soft-50: hsl(from var(--color-text-soft) h s l / 50%);
+    --color-text-soft-20: hsl(from var(--color-text-soft) h s l / 20%);
 
     --color-primary-text: var(--color-text-soft);
-    --color-primary: rgb(231, 169, 101);
-    --color-primary-hover: rgba(231, 169, 101, 0.4);
-    --color-primary-focus-visible: rgba(254, 181, 103, 0.502);
+    --color-primary: #e7a965;
+    --color-primary-hover: #e7a96566;
+    --color-primary-focus-visible: #feb56780;
     --color-primary-active: #feb56799;
     --color-primary-strong: #e7a965;
     /* Deprecated variable, use color-primary instead */
@@ -33,10 +34,10 @@
 
     --color-disabled: #ccd1e980;
 
-    --bg-tooltip: rgb(17, 17, 27);
-    --bg-base: rgb(25, 25, 25);
+    --bg-tooltip: #11111b;
+    --bg-base: #1a1b26;
 
-    --bg-surface: rgb(30, 30, 35);
+    --bg-surface: #252735;
     --bg-surface-border: var(--bg-item-border);
     --bg-surface-border-hover: var(--bg-item-border-hover);
     --bg-surface-hover: #353847;
@@ -48,7 +49,15 @@
     --bg-item-border: #494D62;
     --item-flat-active: hsl(230deg 40% 86% / 20%);
 
+    --level-1-background: #1B1E2C;
+
+    --level-2-background: #232638;
+
+    --level-3-background: #2B3045;
+    --level-3-border: #495174;
+
     --bg-backdrop: #11111B;
+    --bg-indent: #15161E;
 
     /* text & font */
     --text-body: 16px;
@@ -74,16 +83,18 @@
     --spacing-5x: 20px;
     --spacing-8x: 32px;
     --spacing-10x: 40px;
+    --spacing-11x: 50px;
+    --spacing-12x: 70px;
 
     /* border */
-    --border-radius-1x: 2px;
-    --border-radius-2x: 4px;
-    --border-radius-4x: 8px;
+    --border-radius-1x: 4px;
+    --border-radius-2x: 8px;
 
-    --border-size-1x: 2px;
+    /* border sizes*/
+    --border-size-1x: 1px;
 
     /* shadow */
-    --shadow-dialog: 0 19px 38px hsl(0deg  0% 0% / 30%), 0 15px 12px hsl(0deg  0% 0% / 22%);
+    --shadow-dialog: 0 19px 38px hsl(0deg 0% 0% / 30%), 0 15px 12px hsl(0deg 0% 0% / 22%);
 
     /* content width */
     --page-content-max-width: 1440px;
@@ -96,6 +107,8 @@
 
     /* nav */
     --nav-height: 4rem;
+    --nav-event-height: 58px;
+    --nav-breadcrumb-height: 51px;
 
     /* z-index */
     --nav-z-index: 50;
@@ -149,10 +162,6 @@ html {
     font-family: var(--font-sans-serif);
     color: var(--color-primary-text);
     scroll-behavior: smooth;
-    /*
-    //todo: fix nav then add scroll-margin based on css variable
-    */
-    scroll-margin: 64px;
 
     @media (prefers-reduced-motion: reduce) {
         scroll-behavior: auto;
@@ -172,19 +181,6 @@ body {
     main {
         container-type: inline-size;
         container-name: main;
-        padding-bottom: var(--spacing-5x);
-    }
-
-    @media screen and (width > 600px) {
-        main {
-            padding-bottom: var(--spacing-8x);
-        }
-    }
-
-    @media screen and (width > 1200px) {
-        main {
-            padding-bottom: var(--spacing-10x);
-        }
     }
 
     .formsubmission-css-container {
@@ -280,15 +276,15 @@ a.inline-link {
 }
 
 a.inline-link:hover,
-a.inline-link:active {
+a.inline-link:active,
+a.inline-link:focus-visible {
     color: var(--color-text-strong);
 }
 
-.single-line-cutoff {
-    width: 100%;             /* Or any specific width/max-width */
-    white-space: nowrap;     /* Forces text to stay on a single line */
-    overflow: hidden;        /* Hides the text that overflows the container */
-    text-overflow: ellipsis; /* Adds the '...' at the cutoff point */
+a.inline-link:focus-visible {
+    outline: 2px solid var(--color-secondary-focus-visible);
+    outline-offset: 2px;
+    border-radius: var(--border-radius-1x);
 }
 
 .inline-icon {
@@ -316,6 +312,11 @@ a.inline-link:active {
     height: 32px;
 }
 
+.icon-size-40 {
+    width: 40px;
+    height: 40px;
+}
+
 hr {
     width: 100%;
     height: 2px;
@@ -330,7 +331,7 @@ hr {
 
 .input {
     background-color: var(--bg-item);
-    color: var(--color-text-primary);
+    color: var(--color-primary-text);
     border-radius: var(--border-radius-2x);
     min-height: 2.6rem;
     border: 1px solid var(--bg-item-border);
@@ -354,7 +355,8 @@ hr {
     box-shadow: 0 0 0 0.25rem hsl(from var(--color-primary-hover) h s l / 25%);
 }
 
-.input:user-invalid, .input:user-invalid:focus-visible {
+.input:user-invalid,
+.input:user-invalid:focus-visible {
     border-color: #DC3545;
     box-shadow: 0 0 0 0.25rem hsl(from var(--color-error) h s l /25%);
 }
@@ -369,7 +371,7 @@ hr {
 }
 
 .slider::-moz-range-track {
-    background: var(--color-primary-focus);
+    background: var(--color-primary-focus-visible);
 }
 
 /* WebKit (Chrome/Edge/Safari): thumb only; track fill can’t be styled separately with pure CSS */
@@ -396,6 +398,7 @@ input {
     width: 1rem;
     accent-color: var(--color-primary);
     color: var(--color-text-strong);
+    cursor: pointer;
 }
 
 *,
@@ -403,6 +406,11 @@ input {
 *::after {
     box-sizing: inherit;
     outline: none;
+}
+
+:where(a[href], button, summary, [role="button"], input:not([type="hidden"]), select, textarea):focus-visible {
+    outline: 2px solid var(--color-secondary-focus-visible);
+    outline-offset: 2px;
 }
 
 .flex {
@@ -429,7 +437,6 @@ input {
 }
 
 .card {
-    width: var(--mobile-responsive-min-width);
     background: var(--bg-surface);
     border-radius: var(--border-radius-1x);
     box-shadow: 0 0 10px hsl(0deg 0% 0% / 10%);
@@ -437,7 +444,7 @@ input {
 }
 
 .form-card,
-/* deprecate form-card, use surface-pane instead */
+    /* deprecate form-card, use surface-pane instead */
 .surface-pane {
     border-radius: var(--border-radius-2x);
     background-color: var(--bg-surface);
@@ -445,7 +452,7 @@ input {
 }
 
 .form-card-title,
-/* deprecate form-card, use surface-pane instead */
+    /* deprecate form-card, use surface-pane instead */
 .surface-pane-title {
     font-size: var(--text-heading-4);
     font-family: var(--font-sans-serif);
@@ -567,20 +574,21 @@ input {
 /* Event status card */
 .event-status {
     display: flex;
-    gap: var(--spacing-2x);
-    padding: var(--border-radius-2x);
-    border: 2px solid;
-    border-radius: 1rem;
+    gap: var(--spacing-1x);
+    padding-inline: var(--spacing-2x);
+    padding-block: var(--spacing-1x);
+    border: 1px solid;
+    border-radius: 100vw;
 }
 
 .kladd {
-    color: var(--color-soft-text);
-    border-color: var(--color-soft-text);
+    color: var(--color-text-soft);
+    border-color: var(--color-text-soft);
 }
 
 .innsendt {
-    color: var(--color-soft-text);
-    border-color: var(--color-soft-text);
+    color: var(--color-text-soft);
+    border-color: var(--color-text-soft);
 }
 
 .publisert {
@@ -599,6 +607,7 @@ input {
 }
 
 @media print {
+
     .no-print,
     .no-print * {
         display: none !important;

@@ -1,3 +1,4 @@
+"use strict"
 const inputUsername = document.getElementById("username");
 const inputPassword = document.getElementById("password");
 const loginForm = document.getElementById("login-form");

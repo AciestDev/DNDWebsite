@@ -6,33 +6,40 @@
     <title>1hp</title>
     <link rel="icon" type="image/x-icon" href="../Images/tab-icon.png">
     <link rel="stylesheet" href="../CSS/style.css">
-    <link rel="stylesheet" href="../CSS/index.css">
+    <link rel="stylesheet" href="../CSS/static/index.css">
+    <link rel="stylesheet" href="../CSS/static/buttons.css">
+    <link rel="stylesheet" href="../CSS/static/card.css">
     <script src="../JavaScript/index.js" defer></script>
 </head>
 <body>
     <main>
-        
-        <nav>
-            <h1 id="mainTitle">1hp</h1>
-        </nav>
-        
-        <div class="main-page-login">
-            <h2> Create your account here!</h2>
-            <form class="main-page-login-small" id="login-form">
-                <div class="user-pass">
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" 
-                    name="username" placeholder="Enter username" required>
+        <div class="background">
+            <header class="main-menu-header">
+                <nav>
+                    <a id="mainTitle" href="/websites/register.html">1hp</a>
+                </nav>
+            </header>
+            <div id="main-menu-container">
+                <div class="main-page-login">
+                    <form class="main-page-login-form" id="login-form">
+                        <h2> Create your account here!</h2>
+                        <div class="user-pass">
+                            <label for="username">Username:</label>
+                            <input type="text" id="username"
+                            name="username" placeholder="Enter username" required>
+                        </div>
+                        <div class="user-pass">
+                            <label for="password">Password:</label>
+                            <input type="password" id="password"
+                            name="password" placeholder="Enter password" required>
+                        </div>
+                        <button type="submit">Sign up!</button>
+                        <a>already have an account? Login</a>
+
+                        <div id="responseMessage"></div>
+                    </form>
                 </div>
-                <div class="user-pass">
-                    <label for="password">Password:</label>
-                    <input type="password" id="password"
-                    name="password" placeholder="Enter password" required>
-                </div>
-                <button id="login-button" type="submit">Sign up!</button>
-            </form>
-            <div id="responseMessage"></div>
-            <a id="switch-login">already have an account? Login</a>
+            </div>
         </div>
     </main>
 </body>

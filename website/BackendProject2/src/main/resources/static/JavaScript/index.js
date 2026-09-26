@@ -1,8 +1,9 @@
-const formHeader = document.querySelector(".main-page-login h2");
-const submitButton = document.getElementById("login-button");
-const switchLink = document.getElementById("switch-login");
-const loginForm = document.getElementById("login-form");
-const responseMessage = document.getElementById("responseMessage");
+"use strict"
+const form = document.getElementById("login-form");
+const formHeader = form.querySelector("h2");
+const submitButton = form.querySelector("button");
+const switchLink = form.querySelector("a");
+const responseMessage = form.querySelector("#responseMessage");
 
 let isRegisterMode = true;
 
@@ -23,7 +24,7 @@ switchLink.addEventListener("click", () => {
 
 
 
-loginForm.addEventListener("submit", async function(event) {
+form.addEventListener("submit", async function(event) {
     event.preventDefault();
 
     const username = document.getElementById("username").value;
@@ -46,8 +47,13 @@ loginForm.addEventListener("submit", async function(event) {
         });
 
         const data = await response.json();
-        responseMessage.textContent = data.message;
-        responseMessage.style.color = response.ok ? "green" : "red";
+
+        if (response.ok) {
+            window.location.href = "../Websites/dashboard.html";
+        } else {
+            responseMessage.style.color = "red";
+            responseMessage.textContent = data.message;
+        }
 
     } catch (error) {
         responseMessage.style.color = "red";
