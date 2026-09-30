@@ -1,0 +1,21 @@
+character needs:
+name
+class
+level
+race(or subrace)
+abilites scores
+feats
+equipment(inentory part1), items(inventory part2 (probably best to keep both equipment and items in the same table))
+spells(if the character has any)
+conditions
+resistances
+immunities
+currentHP
+maxHP
+background
+characteristics (flaws, personality and so on)
+skills (and their profficiencies)
+savingthrows
+languaages
+senses
+proficiency with different tools armor and weapons

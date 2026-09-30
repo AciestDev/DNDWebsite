@@ -4,12 +4,12 @@ package com.example.dnd.auth;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "app_users")
+@Table(name = "users", schema = "auth_schema")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(unique = true, nullable = false)
     private String username;
@@ -17,9 +17,7 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    public User() {
-
-    }
+    public User() {}
 
     public User(String username, String password) {
         this.username = username;
@@ -38,7 +36,7 @@ public class User {
     public void setUsername(String username) {
         this.username = username;
     }
-    public int getId() {
+    public Long getId() {
         return id;
     }
 }
