@@ -44,11 +44,14 @@ public class AuthController {
 
     @GetMapping("/me")
     public ResponseEntity<?> getCurrentUser(HttpSession session) {
-        User user = (User) session.getAttribute("user");
 
-        if (user == null) {
+        Long userId = (Long) session.getAttribute("user");
+
+        if (userId == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "Not logged in"));
         }
+
+        User user = userDAO.findById(userId);
 
         return ResponseEntity.ok(Map.of(
                 "id", user.getId(),

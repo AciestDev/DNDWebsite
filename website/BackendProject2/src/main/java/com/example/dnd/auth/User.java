@@ -1,7 +1,11 @@
 package com.example.dnd.auth;
 
 
+import com.example.dnd.character.model.Character;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users", schema = "auth_schema")
@@ -16,6 +20,9 @@ public class User {
 
     @Column(nullable = false)
     private String password;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Character> characters = new ArrayList<>();
 
     public User() {}
 

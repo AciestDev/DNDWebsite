@@ -6,22 +6,28 @@ document.addEventListener("DOMContentLoaded", async () => {
     const userResponse = await fetch("/api/me");
 
     if (!userResponse.ok) {
-        window.location.href = "/login.html";
+        window.location.href = "Websites/register.html";
         return;
     }
 
     const userData = await userResponse.json();
 
-    mainContainer.querySelector("h1").textContent = `welcome back ${userData.name}!`;
+    mainContainer.querySelector("h1").textContent = `welcome back ${userData.username}!`;
     loadUserCharacters();
 });
 
 async function loadUserCharacters() {
     const response = await fetch("/api/characters/my-characters");
-    const characters = await response.json();
 
+    if (!response.ok) {
+        console.error("Failed to load characters");
+        const cardsContainer = mainContainer.querySelector("div");
+        cardsContainer.textContent = response.message;
+        return;
+    }
+
+    const characters = await response.json();
     const cardsContainer = mainContainer.querySelector("div");
-    cardsContainer.innerHTML = "";
 
     if (characters.length === 0) {
         cardsContainer.innerHTML = "<p>You don't have any characters yet. <a>Create one!</a></p>";
@@ -46,5 +52,5 @@ async function loadUserCharacters() {
 
 document.getElementById("logoutBtn").addEventListener("click", async () => {
     await fetch("/api/logout", { method: "POST" });
-    window.location.href = "/login.html";
+    window.location.href = "/Websites/register.html";
 });
