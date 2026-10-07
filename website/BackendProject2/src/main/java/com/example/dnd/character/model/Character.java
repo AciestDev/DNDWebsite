@@ -40,6 +40,9 @@ public class Character {
 
 
     public Character() {}
+    public Character(User user, String name) {
+        this.user = user;
+    }
 
     public String getName() {
         return name;
@@ -49,6 +52,9 @@ public class Character {
     }
     public User getUser() {
         return user;
+    }
+    public Long getUserId() {
+        return user != null ? user.getId() : null;
     }
 
     public void setName(String name) {

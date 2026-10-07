@@ -1,21 +1,29 @@
 package com.example.dnd.character.databaseCommuncation;
 
 
+import com.example.dnd.auth.User;
+import com.example.dnd.auth.UserDAO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 import java.util.List;
+import com.example.dnd.character.model.Character;
 
 @Repository
 public class CharacterDAO {
 
+    private final UserDAO userDAO;
     @PersistenceContext
     private EntityManager em;
 
-    public List<com.example.dnd.character.model.Character> findByUserId(Long userId) {
+    public CharacterDAO(UserDAO userDAO) {
+        this.userDAO = userDAO;
+    }
+
+    public List<Character> findByUserId(Long userId) {
         return em.createQuery(
-                        "SELECT c FROM Character c WHERE c.user.id = :userId", com.example.dnd.character.model.Character.class)
+                        "SELECT c FROM Character c WHERE c.user.id = :userId", Character.class)
                 .setParameter("userId", userId)
                 .getResultList();
     }
@@ -25,7 +33,21 @@ public class CharacterDAO {
     }
 
     @Transactional
-    public com.example.dnd.character.model.Character save(com.example.dnd.character.model.Character character) {
+    public Character save(Character character) {
+        if (character.getId() == null) {
+            em.persist(character);
+            return character;
+        } else {
+            return em.merge(character);
+        }
+    }
+
+    @Transactional
+    public Character save(Long userId, String name) {
+        Character character = new Character();
+        User user = userDAO.findById(userId);
+        character.setName(name);
+        character.setUser(user);
         if (character.getId() == null) {
             em.persist(character);
             return character;

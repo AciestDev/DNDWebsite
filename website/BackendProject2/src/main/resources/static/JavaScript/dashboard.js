@@ -40,17 +40,19 @@ async function loadUserCharacters() {
         const characterName = document.createElement("h2");
         characterName.textContent = character.name;
 
-        const characterInfo = document.createElement("p");
-        characterInfo.textContent = `Level ${character.level} ${character.characterClass}`;
+
+        //const characterInfo = document.createElement("p");
+        //characterInfo.textContent = `Level ${character.level} ${character.characterClass}`;
+
+        const editLink = document.createElement("a");
+        editLink.href = `characterCreation.html?id=${character.id}`;
+        editLink.textContent = "Edit Character";
+        editLink.className = "edit-link";
 
         characterCard.appendChild(characterName);
-        characterCard.appendChild(characterInfo);
+        //characterCard.appendChild(characterInfo);
+        characterCard.appendChild(editLink);
 
         cardsContainer.appendChild(characterCard);
     });
 }
-
-document.getElementById("logoutBtn").addEventListener("click", async () => {
-    await fetch("/api/logout", { method: "POST" });
-    window.location.href = "/Websites/register.html";
-});
