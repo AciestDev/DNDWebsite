@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 if (!isUpdate) {
                     const userData = await response.json();
                     console.log(userData);
-                    window.location.href = "../Websites/characterCreation.html?id=" + userData;
+                    window.location.href = "../Websites/characterCreation.html?id=" + userData.id;
                 }
             } else {
                 const body = await response.text();

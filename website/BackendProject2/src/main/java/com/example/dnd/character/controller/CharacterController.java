@@ -76,7 +76,7 @@ public class CharacterController {
         characterData.setUser(user);
 
         Character savedCharacter = characterDAO.save(characterData);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedCharacter.getId());
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedCharacter);
     }
 
     @PutMapping("/{id}")
