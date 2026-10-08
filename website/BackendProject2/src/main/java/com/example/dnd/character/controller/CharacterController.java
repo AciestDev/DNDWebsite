@@ -73,8 +73,6 @@ public class CharacterController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User account not found");
         }
 
-
-
         characterData.setUser(user);
 
         Character savedCharacter = characterDAO.save(characterData);
@@ -109,5 +107,23 @@ public class CharacterController {
 
         Character savedCharacter = characterDAO.save(existingCharacter);
         return ResponseEntity.ok(savedCharacter);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteCharacter(@PathVariable("id") Long characterId, HttpSession session) {
+        Long userId = (Long) session.getAttribute("user");
+        if (userId == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized");
+        }
+        Character character = characterDAO.findById(characterId);
+        if (character == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Character not found");
+        }
+
+        if (!character.getUserId().equals(userId)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Forbidden: You do not own this character");
+        }
+        characterDAO.delete(characterId);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }

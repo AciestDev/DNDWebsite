@@ -11,6 +11,18 @@ document.addEventListener("DOMContentLoaded", async () => {
         const response = await fetch(`/api/characters/${characterId}`);
         const character = await response.json();
 
+        const deleteButton = document.querySelector("#delete-character-btn");
+        deleteButton.removeAttribute("hidden");
+        deleteButton.addEventListener("click", async () => {
+            if (!confirm("Are you sure you want to delete this character?")) return;
+            const deleteResponse = await fetch(`/api/characters/${characterId}`, {
+                method: "DELETE",
+            });
+            if (deleteResponse.ok) {
+                window.location.href = "../Websites/Dashboard.html";
+            }
+        })
+
         form.elements["name"].value = character.name;
         // Populate additional fields later
     }
@@ -20,8 +32,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const formData = new FormData(form);
         const payload = Object.fromEntries(formData.entries());
-
-        console.log(payload);
 
         const isUpdate = Boolean(characterId);
         const endpoint = isUpdate ? `/api/characters/${characterId}` : "/api/characters";
@@ -36,7 +46,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             const savedStatus = document.querySelector("#saved-status");
             if (response.ok) {
-                savedStatus.textContent = response.statusText;
+                savedStatus.textContent = "successfully saved";
+                console.log(response.statusText);
+                if (!isUpdate) {
+                    const userData = await response.json();
+                    console.log(userData);
+                    window.location.href = "../Websites/characterCreation.html?id=" + userData;
+                }
             } else {
                 const body = await response.text();
                 console.error("Save failed:", response.status, body);

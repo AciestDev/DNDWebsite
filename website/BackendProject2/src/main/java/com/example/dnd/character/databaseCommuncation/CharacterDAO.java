@@ -55,4 +55,9 @@ public class CharacterDAO {
             return em.merge(character);
         }
     }
+
+    @Transactional
+    public void delete(Long id) {
+        em.remove(findById(id));
+    }
 }
