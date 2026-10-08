@@ -10,20 +10,21 @@
     <link rel="stylesheet" href="../CSS/static/buttons.css">
     <link rel="stylesheet" href="../CSS/static/card.css">
     <script src="../JavaScript/dashboard.js" defer></script>
+    <script src="../JavaScript/logoutLogic.js" defer></script>
 </head>
 <body>
-
     <main>
         <div class="background">
+            <header class="main-menu-header">
+                <nav>
+                    <a id="mainTitle" href="/api/me">1hp</a>
+                    <a href="/api/me">My characters</a>
+                    <button id="logoutBtn">Logout</button>
+                </nav>
+            </header>
             <div id="dashboard">
-                <header class="main-menu-header">
-                    <nav>
-                        <a id="mainTitle" href="/api/me">1hp</a>
-                        <a href="/api/me">My characters</a>
-                        <button id="logoutBtn">Logout</button>
-                    </nav>
-                </header>
-
+                <p>0/7</p>
+                <a href="/Websites/characterCreation.html">Create a new character</a>
                 <div class="charater-container" id="myCharacters">
                     <h1></h1>
 

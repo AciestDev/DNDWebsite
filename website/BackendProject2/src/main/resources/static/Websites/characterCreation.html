@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create - 1hp</title>
+    <link rel="icon" type="image/x-icon" href="../Images/temp.jpg">
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/static/index.css">
+    <link rel="stylesheet" href="../CSS/static/buttons.css">
+    <link rel="stylesheet" href="../CSS/static/card.css">
+    <script src="../JavaScript/characterCreation.js" defer></script>
+    <script src="../JavaScript/logoutLogic.js" defer></script>
+</head>
+<body>
+    <main>
+        <div class="background">
+            <header class="main-menu-header">
+                <nav>
+                    <a id="mainTitle" href="dashboard.html">1hp</a>
+                    <a href="dashboard.html">My characters</a>
+                    <button id="logoutBtn">Logout</button>
+                </nav>
+            </header>
+            <div id="create-character">
+                <form id="character-creation-form">
+                    <div id="character-fields">
+                        <div class="input-group">
+                            <label for="characterName">Character Name</label>
+                            <input type="text" id="characterName" name="name" placeholder="">
+                        </div>
+
+                        <!--
+                        <div class="input-group">
+                            <label for="characterClass">Class</label>
+                            <select id="characterClass" name="characterClass">
+                                <option value="warrior">Warrior</option>
+                                <option value="mage">Mage</option>
+                            </select>
+                        </div>
+                        -->
+                    </div>
+
+                    <button type="submit" id="save-character-btn">Save Character</button>
+
+                    <button type="button" id="delete-character-btn" hidden>Delete</button>
+                </form>
+                <p id="saved-status"></p>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

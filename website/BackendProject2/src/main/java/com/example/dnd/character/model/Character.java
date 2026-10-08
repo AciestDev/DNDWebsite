@@ -40,6 +40,10 @@ public class Character {
 
 
     public Character() {}
+    public Character(User user, String name) {
+        this.user = user;
+        this.name = name;
+    }
 
     public String getName() {
         return name;
@@ -50,11 +54,17 @@ public class Character {
     public User getUser() {
         return user;
     }
+    public Long getUserId() {
+        return user != null ? user.getId() : null;
+    }
 
     public void setName(String name) {
         this.name = name;
     }
     public void setUser(User user) {
         this.user = user;
+    }
+    public void setId(Long id) {
+        this.id = id;
     }
 }
