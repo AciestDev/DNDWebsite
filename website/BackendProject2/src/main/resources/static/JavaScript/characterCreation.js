@@ -21,6 +21,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         const formData = new FormData(form);
         const payload = Object.fromEntries(formData.entries());
 
+        console.log(payload);
+
         const isUpdate = Boolean(characterId);
         const endpoint = isUpdate ? `/api/characters/${characterId}` : "/api/characters";
         const httpMethod = isUpdate ? "PUT" : "POST";
@@ -36,8 +38,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (response.ok) {
                 savedStatus.textContent = response.statusText;
             } else {
-                savedStatus.textContent = response.statusText;
-                console.error("Failed to save character");
+                const body = await response.text();
+                console.error("Save failed:", response.status, body);
+                savedStatus.textContent = `Failed (${response.status}): ${body}`;
             }
         } catch (error) {
             console.error("Network error:", error);

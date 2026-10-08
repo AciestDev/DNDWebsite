@@ -56,6 +56,8 @@ public class CharacterController {
         return ResponseEntity.ok(character);
     }
 
+
+
     @PostMapping
     public ResponseEntity<?> createCharacter(@RequestBody Character characterData, HttpSession session) {
         Long userId = (Long) session.getAttribute("user");
@@ -64,14 +66,19 @@ public class CharacterController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized");
         }
 
+        characterData.setId(null);
+
         User user = userDAO.findById(userId);
         if (user == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User account not found");
         }
+
+
+
         characterData.setUser(user);
 
         Character savedCharacter = characterDAO.save(characterData);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedCharacter);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedCharacter.getId());
     }
 
     @PutMapping("/{id}")

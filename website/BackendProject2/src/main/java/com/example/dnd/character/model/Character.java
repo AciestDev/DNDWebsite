@@ -42,6 +42,7 @@ public class Character {
     public Character() {}
     public Character(User user, String name) {
         this.user = user;
+        this.name = name;
     }
 
     public String getName() {
@@ -62,5 +63,8 @@ public class Character {
     }
     public void setUser(User user) {
         this.user = user;
+    }
+    public void setId(Long id) {
+        this.id = id;
     }
 }
