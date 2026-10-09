@@ -1,7 +1,9 @@
 "use strict"
-const inputUsername = document.getElementById("username");
-const inputPassword = document.getElementById("password");
-const loginForm = document.getElementById("login-form");
+
+const loginForm = document.querySelector("form");
+const inputUsername = loginForm.querySelector("#username");
+const inputPassword = document.querySelector("#password");
+
 
 
 function handleLogin(event) {
@@ -9,7 +11,7 @@ function handleLogin(event) {
     const username = inputUsername.value.trim();
     const password = inputPassword.value.trim();
 
-    if (username === "admin" && password === "dndiscool") {
+    if (username === "admin" && password === "dndpass") {
         window.location.href = "../Websites/register.html"
     }
 }
