@@ -1,7 +1,6 @@
 "use strict"
 
 const mainDashboard = document.querySelector("#dashboard");
-
 const userContainer = document.querySelector("#myCharacters");
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -33,6 +32,9 @@ async function loadUserCharacters() {
 
     if (characters.length === 0) {
         cardsContainer.innerHTML = "<p>You don't have any characters yet. <a>Create one!</a></p>";
+    } else if (characters.length === 7) {
+        const newCharacterLink = mainDashboard.querySelector("a");
+        newCharacterLink.addAttribute = "hidden";
     }
 
     const characterLimit = mainDashboard.querySelector("p");
