@@ -18,27 +18,18 @@ public class UserDAO {
     }
 
     public User findSingleUserByUsername(String username) {
-        try {
-            return em.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class)
-                    .setParameter("username", username)
-                    .getResultList()
-                    .stream()
-                    .findFirst()
-                    .orElse(null);
-        } catch (Exception e) {
-            throw e;
-        }
+        return em.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class)
+                .setParameter("username", username)
+                .getResultList()
+                .stream()
+                .findFirst()
+                .orElse(null);
     }
 
     public List<User> findUsersByUsername(String username) {
-
-        try {
-            return em.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class)
-                    .setParameter("username", username)
-                    .getResultList();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        return em.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class)
+                .setParameter("username", username)
+                .getResultList();
     }
 
     @Transactional
