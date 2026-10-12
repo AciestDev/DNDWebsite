@@ -75,6 +75,7 @@ public class AuthController {
     @PostMapping("/logout")
     public ResponseEntity<Map<String, String>> logout(HttpSession session) {
         session.invalidate();
+        log.info("user session id invalidated and hopefully logged out");
         return ResponseEntity.ok(Map.of("message", "Logged out successfully"));
     }
 

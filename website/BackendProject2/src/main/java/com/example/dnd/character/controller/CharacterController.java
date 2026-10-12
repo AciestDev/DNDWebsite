@@ -1,10 +1,13 @@
 package com.example.dnd.character.controller;
 
+import com.example.dnd.auth.AuthController;
 import com.example.dnd.auth.User;
 import com.example.dnd.auth.UserDAO;
 import com.example.dnd.character.databaseCommuncation.CharacterDAO;
 import com.example.dnd.character.model.Character;
 import jakarta.servlet.http.HttpSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +17,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/characters")
 public class CharacterController {
+
+    private static final Logger log = LoggerFactory.getLogger(CharacterController.class);
 
     @Autowired
     private CharacterDAO characterDAO;
@@ -26,6 +31,7 @@ public class CharacterController {
         Long id = (Long) session.getAttribute("user");
 
         if (id == null) {
+            log.warn("Session contains null user in my-characters getMapping");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized");
         }
 
@@ -39,17 +45,20 @@ public class CharacterController {
         Long userId = (Long) session.getAttribute("user");
 
         if (userId == null) {
+            log.warn("Session contains null user in getCharacterById getMapping");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized");
         }
 
         Character character = characterDAO.findById(characterId);
 
         if (character == null) {
+            log.warn("Character either not found in DAO or user has a null character for id: {}", characterId);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Character not found");
         }
 
 
         if (!character.getUserId().equals(userId)) {
+            log.error("user trying to get access to characters they do not own");
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Forbidden: You do not own this character");
         }
 
