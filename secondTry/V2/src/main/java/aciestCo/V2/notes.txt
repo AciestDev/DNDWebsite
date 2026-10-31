@@ -1,14 +1,14 @@
 character needs:
 name
+ability scores
+Hit dice
 class
 subclass
 multiclassing?
-Hit dice
 level
 Proficiency Bonus
 race(or subrace)
 Speed/movement
-ability scores
 Aromor class
 feats
 equipment(inventory part1), items(inventory part2 (probably best to keep both equipment and items in the same table))
