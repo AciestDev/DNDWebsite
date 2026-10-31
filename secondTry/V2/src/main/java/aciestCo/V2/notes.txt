@@ -1,0 +1,31 @@
+character needs:
+name
+class
+subclass
+multiclassing?
+Hit dice
+level
+Proficiency Bonus
+race(or subrace)
+Speed/movement
+ability scores
+Aromor class
+feats
+equipment(inventory part1), items(inventory part2 (probably best to keep both equipment and items in the same table))
+spells(if the character has any/always allow custom if wanted)
+Currency (money and weight)
+conditions
+resistances
+immunities
+currentHP
+maxHP
+TempHP
+background
+characteristics (flaws, personality and so on(probably nice with a small notes section similar to dndbeyond))
+skills (and their proficiencies)
+saving throws
+Death Saving Throws
+languages
+senses
+proficiency with different tools, armor, weapons and items
+Attunment slots and tracking
