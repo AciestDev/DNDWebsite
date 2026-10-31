@@ -57,6 +57,7 @@ form.addEventListener("submit", async function(event) {
         }
 
     } catch (error) {
+        console.error("Auth request failed:", error);
         responseMessage.style.color = "red";
         responseMessage.textContent = "Could not connect to the server.";
     }
